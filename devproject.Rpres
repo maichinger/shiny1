@@ -1,0 +1,62 @@
+devdata Course Project
+========================================================
+author: Markus Aichinger
+date: 24.10.2015
+
+Lottery Application
+========================================================
+
+
+- Did you ever play lottery?
+- What is the chance to win?
+- Try it out https://aims.shinyapps.io/shinyproject1
+
+Input Parameters
+========================================================
+
+
+- Enter a number between 1-6 of the right draws 
+- choose the kind of lottery 
+  - 6 out of 45 
+  - 6 out of 49
+
+
+The theory behind
+========================================================
+
+
+- Playing lotto is similar to an urn model with m white balls, n black balls, k number of draws from the urn without returning the ball back to the urn.
+- This can be modeled by an hypergeometric distribution
+- The probability to get `x` right draws is 
+  - `P({X=x})=` ${m \choose x}*{n \choose k-x}/ {m+n \choose k}$
+  
+ 
+  
+
+
+Some Results to win
+========================================================
+
+```{r, echo=FALSE}
+lottery <- function(x, lottery) { 
+
+  total<-45
+  if (lottery=="49lottery") total<-49
+  m<-6
+  n<-total - m
+  k<-6
+  # hypergeometric distribution for lottery urn
+  # number m of white balls, n=total - m number of black balls, k the number of draws from the urn, P(X=x)
+  choose(m, x)*choose(n, k-x) / choose(m+n, k)
+}
+
+
+```
+The chance to get all 6 right in the 6 out of 45 lottery is:
+```{r }
+lottery(6, "45lottery")  
+``` 
+The chance to get all 5 right in the 6 out of 45 lottery is:
+```{r }
+lottery(5, "45lottery")  
+``` 
